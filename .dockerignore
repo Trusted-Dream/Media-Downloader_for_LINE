@@ -1,0 +1,6 @@
+__pycache__
+.vscode
+.gitignore
+.git
+.env.sample
+client_secrets.json
