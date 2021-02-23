@@ -10,5 +10,5 @@ RUN apt-get install -y ffmpeg \
 
 RUN pip install -r requirements.txt
 # テスト用
-# CMD ["python", "OAuth_Check.py"]
+# CMD ["python", "check_oauth.py"]
 CMD ["python", "app.py"]
