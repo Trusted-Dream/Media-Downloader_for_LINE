@@ -91,7 +91,7 @@ class Worker(object):
 				future = loop.run_in_executor(executor, self.convert,data)
 				await future
 
-		tasks = [proc(queue) for data in range(self.maxworker)]
+		tasks = [asyncio.create_task(proc(queue)) for data in range(self.maxworker)]
 		return await asyncio.wait(tasks)
 
 	def run(self):
@@ -113,7 +113,6 @@ class Worker(object):
 
 			# 処理の並列化
 			loop = asyncio.new_event_loop()
-			asyncio.set_event_loop(None)
 			loop.run_until_complete(
 				self.multi_convert(loop,file_list)
 			)
