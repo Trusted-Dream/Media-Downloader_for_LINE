@@ -23,21 +23,21 @@ client_secrets.json をapp.pyと同じディレクトリに設置します。
 - `.env.sample` を参考に`.env`を作成します。
 - `settings_sample.yaml`を`settings.yaml`に変更し、
 `xxxx`の部分にGoogleOAuthの情報を記入します。
-- `docker-compose build`を実行してビルドします。
+- `# docker-compose build`を実行してビルドします。
 - `credentials.json` が必要になるため、以下の手順を踏みます。
-- `docker-compose run app bash`
-- `python app.py`
+- `# docker-compose run app bash`
+- `# python app.py`
 - 認証します。
 
 - 別のターミナルを開きます。
-- `docker-compose ps`
-- `docker cp 上で確認したコンテナ名:/opt/app/credentials.json $PWD`
+- `# docker-compose ps`
+- `# docker cp 上で確認したコンテナ名:/opt/app/credentials.json $PWD`
 - ターミナルを抜けます。
-- `docker-compose down`
-- `docker-compose build`
+- `# docker-compose down`
+- `# docker-compose build`
 - ngrokを起動し`ngrok http -region=ap 9000` を実行します。
 ## 使用方法
-- `docker-compose up -d`を実行<p>
+- `# docker-compose up -d`を実行<p>
 - [LINE developers](https://developers.line.biz/console/)にアクセスして、Webhook設定の検証でステータスコード200が返ることを確認してください。
 - LINE から以下のようにコマンドを入力させて動作します。
 - /mp3 URL -- 音楽を取得できます。
