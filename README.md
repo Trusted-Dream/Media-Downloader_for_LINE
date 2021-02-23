@@ -35,9 +35,6 @@ client_secrets.json をapp.pyと同じディレクトリに設置します。
 - /nomov URL -- 動画を無変換で取得できます。
 
 ## 上手くいかなかった時は？
- - check_oauth.pyを使用します。
- - Dockerfileの部分を以下に変更します。<p>
-  `CMD ["python", "app.py"]` → `CMD ["python", "check_oauth.py"]`
- - docker-compose up --build
+ - `docker-compose run --rm app pytest` を実行して認証が成功するか、確認してみましょう。
  - GoogleDriveを確認して曲がアップロードされているか確認してみてください。
  - 認証が要求される場合は、認証を行ってください。

@@ -9,6 +9,4 @@ RUN apt-get install -y ffmpeg \
 && rm -rf /var/lib/apt/lists/*
 
 RUN pip install -r requirements.txt
-# テスト用
-# CMD ["python", "check_oauth.py"]
 CMD ["python", "app.py"]
