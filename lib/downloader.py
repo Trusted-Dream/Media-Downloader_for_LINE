@@ -25,12 +25,12 @@ class Worker(object):
 
 	# ダウンロード
 	def download(self):
-		# ニコニコ動画/dailymotion/tiktokは変換なし
+		# ニコニコ動画/dailymotion/tiktokはフォーマット指定なし
 		noconv = set(["nicovideo","dailymotion","tiktok"])
 		mov = set(["/mov","/nomov"])
 		tag = self.tag
 
-		if tag in str(noconv):
+		if [x for x in noconv if x in self.url]:
 			fmt = {}
 		elif tag == "/mp3":
 			fmt = (
@@ -76,7 +76,7 @@ class Worker(object):
 				cmd = formats[0] % (root+ext, cnv_mp3)
 				os.system(cmd)
 				os.remove(root+ext)
-			uploader(self.get_id,data,self.tag,self.dl_dir,self.line_bot_api)
+		uploader(self.get_id,data,self.tag,self.dl_dir,self.line_bot_api)
 	# 並列処理
 	async def multi_convert(self,loop,file_list):
 		executor = concurrent.futures.ProcessPoolExecutor()
