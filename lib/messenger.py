@@ -9,8 +9,8 @@ def reply_message(event,tag,url,line_bot_api):
 	}
 	set_transaction = transaction_dict.get(tag)
 	# Youtubeプレイリストの場合
-	msg = ["プレイリストの" + set_transaction,"をGoogleDriveにアップロードします。\n", \
-		"処理に時間が掛かる場合があります。"]
+	msg = set(["プレイリストの" + set_transaction,"をGoogleDriveにアップロードします。\n", \
+		"処理に時間が掛かる場合があります。"])
 	if "&list=" in url:
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -23,7 +23,7 @@ def reply_message(event,tag,url,line_bot_api):
 			TextSendMessage(text="ニコニコ動画は処理に時間が掛かる場合があります。")
 		)
 	else:
-		msg = [set_transaction,"をGoogleDriveにアップロードします。"]
+		msg = set([set_transaction,"をGoogleDriveにアップロードします。"])
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text=''.join(msg))
