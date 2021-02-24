@@ -35,6 +35,7 @@ def uploader(get_id,file_name,tag,dl_dir,line_bot_api):
 		file_length = MP3(file_name).info.length
 		dur = math.floor(file_length * 1000)
 	else:
+		dur = None
 		root, ext = os.path.splitext(file_name)
 		mimeType = video_ext_dicts.get(ext)
 
@@ -55,6 +56,6 @@ def uploader(get_id,file_name,tag,dl_dir,line_bot_api):
 	file_id = drive.ListFile(
 		{'q': 'title =\"' + title +  '\"'}
 	).GetList()[0]['id']
-
+	
 	link = "https://drive.google.com/uc?export=view&id=" + file_id
 	push_message(link,get_id,tag,title,dur,line_bot_api)

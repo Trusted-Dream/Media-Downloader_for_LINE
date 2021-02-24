@@ -66,17 +66,17 @@ class Worker(object):
 		if formats != None and formats[1] == self.tag:
 			if ext != ".mp4" and self.tag == "/mov":
 				cnv_mp4 = '%s.mp4' % root
+				data = cnv_mp4
 				cmd = formats[0] % (root+ext, cnv_mp4)
 				os.system(cmd)
 				os.remove(root+ext)
-				uploader(self.get_id,cnv_mp4,self.tag,self.dl_dir,self.line_bot_api)
 			else:
 				cnv_mp3 = '%s.mp3' % root
+				data = cnv_mp3
 				cmd = formats[0] % (root+ext, cnv_mp3)
 				os.system(cmd)
 				os.remove(root+ext)
-				uploader(self.get_id,cnv_mp3,self.tag,self.dl_dir,self.line_bot_api)
-
+			uploader(self.get_id,data,self.tag,self.dl_dir,self.line_bot_api)
 	# 並列処理
 	async def multi_convert(self,loop,file_list):
 		executor = concurrent.futures.ProcessPoolExecutor()
@@ -110,10 +110,9 @@ class Worker(object):
 			# DLしたファイルの拡張子の切り取り
 			for ext in fileExtensions:
 				file_list.extend(glob("%s*.%s" % (self.dl_dir,ext)))
-
 			# 処理の並列化
 			loop = asyncio.new_event_loop()
 			loop.run_until_complete(
 				self.multi_convert(loop,file_list)
 			)
-		shutil.rmtree(self.dl_dir)
+			shutil.rmtree(self.dl_dir)
