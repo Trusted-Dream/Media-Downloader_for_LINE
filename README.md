@@ -1,7 +1,6 @@
 # Media Downloader for LINE
 
-![Python](https://img.shields.io/badge/Python-3.9.1-orange)
-![Docker-compose](https://img.shields.io/badge/docker--compose%20-1.27.4-blue)
+![Python](https://img.shields.io/badge/Python-3.8+-orange)
 
 ## ツールについて
 - LINEからYoutube,tiktok,soundcloud,ニコニコ動画,dailymotionから音楽・動画のダウンロードに対応しています。<p>
@@ -13,31 +12,26 @@
 - [LINE API](https://developers.line.biz/console/)を取得してください。
 - [GoogleDriveAPI](https://console.developers.google.com/apis/library/drive.googleapis.com)を取得してください。
 - docker-composeを準備してください。<p>
-※環境が汚れますが、python3.9を導入してpip install後にapp.pyを叩いても動作します。
+※環境が汚れますが、python3.8以上を導入してpip install後にapp.pyを叩いても動作します。
 - [ngrok](https://ngrok.com/)を準備してください。
 
 ## 準備
 - [Google Developers Console](https://console.developers.google.com/) にアクセスしてOAuth 2.0 クライアント ID からclient_secrets.jsonを取得します。<p>
 https://console.developers.google.com/<p>
-client_secrets.json をapp.pyと同じディレクトリに設置します。
+`client_secrets.json`に名前を変更し、`credentials`ディレクトリに設置します。
+- `settings_sample.yaml`を`settings.yaml`に変更し、`xxxx`の部分にGoogleOAuthの情報を記入します。
 - `.env.sample` を参考に`.env`を作成します。
-- `settings_sample.yaml`を`settings.yaml`に変更し、
-`xxxx`の部分にGoogleOAuthの情報を記入します。
-- `# docker-compose build`を実行してビルドします。
-- `credentials.json` が必要になるため、以下の手順を踏みます。
-- `# docker-compose run app bash`
-- `# python app.py`
-- 認証します。
-
-- 別のターミナルを開きます。
-- `# docker-compose ps`
-- `# docker cp 上で確認したコンテナ名:/opt/app/credentials.json $PWD`
-- ターミナルを抜けます。
-- `# docker-compose down`
-- `# docker-compose build`
+- `docker-compose build`を実行してビルドします。
+- `docker-compose run --rm app`を実行して認証します。
+- バックグラウンドで実行させる場合は、Ctrl + Cで一旦停止後、`docker-compose up -d` で起動します。<p>
+　※認証後は `docker-compose up -d` で起動できます。
 - ngrokを起動し`ngrok http -region=ap 9000` を実行します。
+- httpsから始まるURLをLINEの`Webhook URL`に末尾に`/callback`を追加して入力します。<p>
+  <例> `https://2aeebc8adb35.ap.ngrok.io/callback`
+- LINEアプリから`!test` と入力してレスポンスがあれば完了です。
 ## 使用方法
-- `# docker-compose up -d`を実行<p>
+- `docker-compose up -d`を実行<p>
+- ngrokを起動して`ngrok http -region=ap 9000` で起動
 - [LINE developers](https://developers.line.biz/console/)にアクセスして、Webhook設定の検証でステータスコード200が返ることを確認してください。
 - LINE から以下のようにコマンドを入力させて動作します。
 - /mp3 URL -- 音楽を取得できます。
