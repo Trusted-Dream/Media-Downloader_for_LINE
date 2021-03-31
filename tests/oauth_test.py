@@ -1,8 +1,12 @@
 import pytest
-from lib.downloader import Worker
+import setting as s
+from line.downloader import Worker
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+class TestOAuth(object):
+    def setup_method(self):
+        self.url = "https://www.youtube.com/watch?v=4pqJA7aiVJc"
+        self.tag = "/mp3"
 
-class TestClass(object):
-	def test_oauth(self):
-		url = "https://www.youtube.com/watch?v=4pqJA7aiVJc"
-		tag = "/mp3"
-		Worker(tag,url,None,None).run()
+    def test_oauth(self):
+        Worker(self.tag,self.url,None,None).run()
