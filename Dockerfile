@@ -8,5 +8,5 @@ RUN apt-get install -y ffmpeg \
 && apt clean \
 && rm -rf /var/lib/apt/lists/*
 
-RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+RUN python setup.py install
+ENTRYPOINT ["python", "app.py"]
