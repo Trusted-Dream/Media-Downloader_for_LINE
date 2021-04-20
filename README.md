@@ -20,7 +20,8 @@
 https://console.developers.google.com/<p>
 `client_secrets.json`に名前を変更し、`credentials`ディレクトリに設置します。
 - `settings_sample.yaml`を`settings.yaml`に変更し、`xxxx`の部分にGoogleOAuthの情報を記入します。
-- `.env.sample` を参考に`.env`を作成します。
+- `.env.sample` を参考に`.env`を作成します。<p>
+(GoogleDriveの共有IDは `https://drive.google.com/drive/u/0/folders/` 以降の英数字を記入します。)
 - `docker-compose build`を実行してビルドします。
 - `docker-compose run --rm app`を実行して認証します。
 - バックグラウンドで実行させる場合は、Ctrl + Cで一旦停止後、`docker-compose up -d` で起動します。<p>
