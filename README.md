@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-orange)
 
 ## ツールについて
-- LINEからYoutube,tiktok,soundcloud,ニコニコ動画,dailymotionから音楽・動画のダウンロードに対応しています。<p>
+- LINEからYoutube,tiktok,soundcloud,Twitter,dailymotionから音楽・動画のダウンロードに対応しています。<p>
 - ダウンロード後は自動的に、変換→GoogleDriveにアップロード→LINEに完了通知を行います。
 - Youtubeのプレイリストにも対応しています。
 - 複数の音楽・動画の同時変換に対応し、GoogleDriveへの同時アップロードが行えます。(デフォルト4つ同時処理)

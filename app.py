@@ -46,8 +46,9 @@ def line(event):
     param = set(["/mp3","/mov","/nomov"])
     if tag in str(param) and message.startswith(tag):
         url = message.split()[1]
-        reply_message(event,tag,url,line_bot_api)
-        Worker(tag,url,get_id,line_bot_api).run()
+        err = reply_message(event,tag,url,line_bot_api)
+        if err == None:
+            Worker(tag,url,get_id,line_bot_api).run()
     else:
         act_reply_message(event,get_id,message,line_bot_api)
 

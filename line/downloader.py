@@ -7,6 +7,7 @@ import os
 import shutil
 from glob import glob
 from line.uploader import uploader
+from line.messenger import push_message
 
 class Worker(object):
     def __init__(self,tag,url,get_id,line_bot_api):
@@ -26,7 +27,7 @@ class Worker(object):
     # ダウンロード
     def download(self):
         # ニコニコ動画/dailymotion/tiktokはフォーマット指定なし
-        noconv = set(["nicovideo","dailymotion","tiktok"])
+        noconv = set(["twitter","dailymotion","tiktok"])
         mov = set(["/mov","/nomov"])
         tag = self.tag
 
@@ -93,13 +94,9 @@ class Worker(object):
 
     def run(self):
         msg = self.download()
-        # ニコニコ動画のDL処理でリトライが発生した際の再実行処理
-        if "retries" in str(msg):
-            while True:
-                msg = self.download()
-                if not "retries" in str(msg):
-                    break
-        
+        if "ERROR" in str(msg):
+            push_message("",self.get_id,"","ダウンロードに失敗しました。",self.url,self.line_bot_api)
+            raise Exception('Download Failed')
         opt = set(["/mp3","/mov"])
         if self.tag in str(opt):
             fileExtensions = set([ "mp4", "m4a","mkv","webm"])
